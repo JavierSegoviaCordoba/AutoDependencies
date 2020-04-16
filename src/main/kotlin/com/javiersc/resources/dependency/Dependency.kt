@@ -3,7 +3,8 @@ package com.javiersc.resources.dependency
 data class Dependency(private val dependency: String) : Comparable<Dependency> {
     val groupId: String = dependency.split(":")[0]
     val artifact: String = dependency.split(":")[1]
-    val version: Version = dependency.split(":")[2].toVersion()
+    val version: Version? =
+        if (dependency.count { it == ':' } == 3) dependency.split(":")[2].toVersion() else null
 
     override fun compareTo(other: Dependency): Int = when {
         groupId != other.groupId -> when {
@@ -14,7 +15,9 @@ data class Dependency(private val dependency: String) : Comparable<Dependency> {
             artifact.isNumber && other.artifact.isNumber -> artifact.toInt() - other.artifact.toInt()
             else -> artifact.compareTo(other.artifact, true)
         }
-        version != other.version -> version.compareTo(other.version)
+        version != other.version && version != null && other.version != null -> {
+            version.compareTo(other.version)
+        }
         else -> 0
     }
 

@@ -36,6 +36,7 @@ private val dependenciesTxtContent: String
     get() = """
                 com.javiersc.resources:resource:9.8.9
                 com.javiersc.resources:resource:9.8.9
+                org.jetbrains.kotlin:kotlin-stdlib
                 com.javiersc.resources:resource:9.8.8-alpha01
                 com.javiersc.resources:resource:9.8.10
                 com.javiersc.resources:resource:9.9.9

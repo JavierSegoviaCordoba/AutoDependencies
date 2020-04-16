@@ -6,12 +6,7 @@ internal fun String.toVersion(): Version {
     val majorMinorIncremental = split("-")[0]
     val qualifier = split("-").getOrNull(1)
     val (major, minor, incremental) = majorMinorIncremental.split(".")
-    return Version(
-        major,
-        minor,
-        incremental,
-        qualifier
-    )
+    return Version(major, minor, incremental, qualifier)
 }
 
 internal fun String.toQualifier(): Qualifier = Qualifier(filter(Char::isLetter), filter(Char::isDigit))

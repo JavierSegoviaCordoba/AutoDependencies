@@ -27,7 +27,7 @@ class AutoDependenciesPlugin : Plugin<Settings> {
         val kotlinFolder = File("$rootDirPath/buildSrc/src/main/kotlin").apply {
             if (!exists()) mkdirs()
         }
-        val dependencyFile = File("$kotlinFolder/Dependencies.kt").apply {
+        val dependencyFile = File("$kotlinFolder/libs.kt").apply {
             createNewFile()
         }
 

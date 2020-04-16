@@ -27,7 +27,7 @@ internal class AutoDependenciesPluginTest {
         projectDir.runGradleProjects().shouldBeSuccess()
 
         projectDir.walk().forEach(::println)
-        File("${projectDir.toFile().path}/buildSrc/src/main/kotlin/Dependencies.kt")
+        File("${projectDir.toFile().path}/buildSrc/src/main/kotlin/Libs.kt")
             .readLines().forEach(::println)
     }
 }

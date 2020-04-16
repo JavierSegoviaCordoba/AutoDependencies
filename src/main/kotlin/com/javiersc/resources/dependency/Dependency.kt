@@ -33,12 +33,19 @@ fun List<Dependency>.cleanDuplicates(): List<Dependency> {
 }
 
 fun List<Dependency>.toDependenciesString(): String {
-    var temp = "import org.gradle.kotlin.dsl.DependencyHandlerScope\n\n"
+    var temp = """
+        |val libs: Libs get() = Libs
+        |
+        |object Libs {
+    """.trimMargin()
     forEach {
-        temp += """|val DependencyHandlerScope.${it.artifact.toCamelCase()}: String 
-                   |    get() = "$it"
-                   |${"\n"}
-                """.trimMargin()
+        temp += """ 
+            |${"\n"}
+            |    val ${it.artifact.toCamelCase()}: String
+            |        get() = "$it"
+        """.trimMargin()
     }
+    temp += "\n}"
+
     return temp
 }

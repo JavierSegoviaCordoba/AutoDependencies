@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.javiersc.resources.autodependencies"
-version = "0.0.6"
+version = "0.0.7"
 
 repositories {
     jcenter()

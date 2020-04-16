@@ -10,7 +10,7 @@ import java.io.File
 
 class AutoDependenciesPlugin : Plugin<Settings> {
 
-    override fun apply(target: Settings) {
+    override fun apply(target: Settings): Unit = target.gradle.beforeProject {
         val rootDirPath = target.rootDir.path
         val buildSrcPath = File("$rootDirPath/buildSrc/").apply {
             if (!this.exists()) mkdirs()
@@ -31,19 +31,17 @@ class AutoDependenciesPlugin : Plugin<Settings> {
             createNewFile()
         }
 
-        target.gradle.afterProject {
-            dependencyFile.writeText(
-                dependenciesTxtFile.readLines()
-                    .map { it.replace(""""""", "") }
-                    .map { it.replace("'", "") }
-                    .map { it.replace(" ", "") }
-                    .map(String::toDependency)
-                    .cleanDuplicates()
-                    .sortedWith(
-                        compareBy(Dependency::groupId, Dependency::artifact, Dependency::version)
-                    ).toDependenciesString()
-            )
-        }
+        dependencyFile.writeText(
+            dependenciesTxtFile.readLines()
+                .map { it.replace(""""""", "") }
+                .map { it.replace("'", "") }
+                .map { it.replace(" ", "") }
+                .map(String::toDependency)
+                .cleanDuplicates()
+                .sortedWith(
+                    compareBy(Dependency::groupId, Dependency::artifact, Dependency::version)
+                ).toDependenciesString()
+        )
     }
 }
 

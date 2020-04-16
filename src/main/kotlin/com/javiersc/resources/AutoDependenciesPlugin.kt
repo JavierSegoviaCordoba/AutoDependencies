@@ -1,5 +1,6 @@
 package com.javiersc.resources
 
+import com.javiersc.resources.dependency.Dependency
 import com.javiersc.resources.dependency.cleanDuplicates
 import com.javiersc.resources.dependency.toDependenciesString
 import com.javiersc.resources.dependency.toDependency
@@ -38,7 +39,9 @@ class AutoDependenciesPlugin : Plugin<Settings> {
                     .map { it.replace(" ", "") }
                     .map(String::toDependency)
                     .cleanDuplicates()
-                    .toDependenciesString()
+                    .sortedWith(
+                        compareBy(Dependency::groupId, Dependency::artifact, Dependency::version)
+                    ).toDependenciesString()
             )
         }
     }

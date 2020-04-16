@@ -29,7 +29,7 @@ fun List<Dependency>.cleanDuplicates(): List<Dependency> {
 }
 
 fun List<Dependency>.toDependenciesString(): String {
-    var temp = ""
+    var temp = "import org.gradle.kotlin.dsl.DependencyHandlerScope\n\n"
     forEach {
         temp += """|val DependencyHandlerScope.${it.artifact.toCamelCase()}: String 
                    |    get() = "$it"

@@ -1,9 +1,11 @@
 package com.javiersc.resources
 
 import com.javiersc.resources.extensions.fileTree
+import com.javiersc.resources.extensions.walk
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
+import java.io.File
 import java.nio.file.Path
 
 internal class AutoDependenciesPluginTest {
@@ -22,9 +24,11 @@ internal class AutoDependenciesPluginTest {
             )
         }
 
-        val result = projectDir.runGradleProjects()
+        projectDir.runGradleProjects().shouldBeSuccess()
 
-        result.shouldBeSuccess()
+        projectDir.walk().forEach(::println)
+        File("${projectDir.toFile().path}/buildSrc/src/main/kotlin/Dependencies.kt")
+            .readLines().forEach(::println)
     }
 }
 

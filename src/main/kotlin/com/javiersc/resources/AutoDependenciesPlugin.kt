@@ -33,13 +33,13 @@ class AutoDependenciesPlugin : Plugin<Settings> {
         target.gradle.afterProject {
             dependencyFile.writeText(
                 dependenciesTxtFile.readLines()
+                    .map { it.replace(""""""", "") }
+                    .map { it.replace("'", "") }
+                    .map { it.replace(" ", "") }
                     .map(String::toDependency)
                     .cleanDuplicates()
                     .toDependenciesString()
             )
-
-            println("\n${dependencyFile.absolutePath}")
-            dependencyFile.readLines().forEach(::println)
         }
     }
 }

@@ -33,18 +33,22 @@ fun List<Dependency>.cleanDuplicates(): List<Dependency> {
 }
 
 fun List<Dependency>.toDependenciesString(): String {
-    var temp = """
-        |val libs: Libs get() = Libs
-        |
-        |object Libs {
-    """.trimMargin()
-    forEach {
-        temp += """ 
-            |${"\n"}
-            |    val ${it.artifact.toCamelCase()}: String
-            |        get() = "$it"
+    var temp =
+        """
+            |val DependencyHandlerScope.libs: Libs get() = Libs
+            |
+            |object Libs {
         """.trimMargin()
+
+    forEach {
+        temp +=
+            """ 
+                |${"\n"}
+                |    val ${it.artifact.toCamelCase()}: String
+                |        get() = "$it"
+            """.trimMargin()
     }
+
     temp += "\n}"
 
     return temp

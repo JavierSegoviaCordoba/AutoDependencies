@@ -12,7 +12,7 @@ internal class AutoDependenciesPluginTest {
 
     @BeforeEach
     fun `generate dependencies txt file`(@TempDir projectDir: Path) {
-        projectDir.fileTree { file("dependencies.txt", dependenciesTxtContent) }
+        projectDir.fileTree { file("libs.txt", dependenciesTxtContent) }
     }
 
     @Test

@@ -21,7 +21,7 @@ class AutoDependenciesPlugin : Plugin<Settings> {
                 writeText(buildGradleKtsContent)
             }
         }
-        val dependenciesTxtFile = File("$rootDirPath/dependencies.txt")
+        val dependenciesTxtFile = File("$rootDirPath/libs.txt")
 
         if (!dependenciesTxtFile.exists()) dependenciesTxtFile.createNewFile()
         val kotlinFolder = File("$rootDirPath/buildSrc/src/main/kotlin").apply {

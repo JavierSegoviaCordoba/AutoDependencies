@@ -10,7 +10,7 @@ import java.io.File
 
 class AutoDependenciesPlugin : Plugin<Settings> {
 
-    override fun apply(target: Settings): Unit = target.gradle.beforeProject {
+    override fun apply(target: Settings) {
         val rootDirPath = target.rootDir.path
         val buildSrcPath = File("$rootDirPath/buildSrc/").apply {
             if (!this.exists()) mkdirs()

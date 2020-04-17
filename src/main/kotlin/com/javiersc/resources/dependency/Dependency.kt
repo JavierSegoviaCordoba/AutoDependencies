@@ -34,9 +34,7 @@ fun List<Dependency>.cleanDuplicates(): List<Dependency> {
 
 fun List<Dependency>.toDependenciesString(): String {
     var temp =
-        """ |import org.gradle.kotlin.dsl.DependencyHandlerScope
-            |
-            |val DependencyHandlerScope.libs: Libs get() = Libs
+        """ |val libs: Libs get() = Libs
             |
             |object Libs {
         """.trimMargin()
